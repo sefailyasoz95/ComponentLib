@@ -1,4 +1,4 @@
-export const variantHelper = (variant: string, backgroundColor?: string) => {
+export const variantHelper = (variant: string="outlined", backgroundColor?: string) => {
     let variantStyle = variant === "outlined" ? {
         borderWidth: 1,
         backgroundColor: "rgba(0,0,0,0)",
@@ -11,10 +11,10 @@ export const variantHelper = (variant: string, backgroundColor?: string) => {
     return variantStyle
 }
 
-export const sizeHelper = (size: string, height: number=35) => {
+export const sizeHelper = (size: string="", height?: string) => {
     let sizeStyle = size === "xlarge" ? {
         width: "95%",
-        height
+        height: "auto"
     } : size === "medium" ? {
         width: "45%",
         height
@@ -30,7 +30,7 @@ export const sizeHelper = (size: string, height: number=35) => {
     }  
     return sizeStyle
 }
-export const cornerHelper = (corner: string) => {
+export const cornerHelper = (corner: string="cornered") => {
     let cornerStyle = corner === "rounded" ? {
         borderRadius: 50,
     } : corner === "curved" ? {
@@ -39,4 +39,14 @@ export const cornerHelper = (corner: string) => {
         borderRadius: 0,
     }
     return cornerStyle
+}
+
+export const textColorHelper = (variant?: string, color?: string, textColor?: string) => {
+    let txtColor = "black"
+    if(variant === "outlined" ||variant === undefined){
+        txtColor = textColor ? textColor : color ? color : txtColor
+    }else{
+        txtColor = textColor ? textColor : "white"
+    }
+    return txtColor
 }
