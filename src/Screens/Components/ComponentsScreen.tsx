@@ -1,6 +1,7 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Keyboard, KeyboardAvoidingView, ScrollView } from "react-native";
+import { View, StyleSheet, Keyboard, KeyboardAvoidingView, ScrollView, useWindowDimensions } from "react-native";
+import BottomSheet from "../../Components/BottomSheet/BottomSheet";
 import Button from "../../Components/Button/Button";
 import Input from "../../Components/Input/Input";
 import Line from "../../Components/Line/Line";
@@ -11,7 +12,12 @@ type Props = {
 };
 
 const ComponentsScreen = ({ navigation }: Props) => {
+	const dimension = useWindowDimensions();
 	const [loading, setLoading] = useState(false);
+	const [showBottomSheet, setShowBottomSheet] = useState({
+		show: false,
+		height: dimension.height / 2,
+	});
 	useEffect(() => {
 		loading &&
 			setTimeout(() => {
@@ -30,7 +36,6 @@ const ComponentsScreen = ({ navigation }: Props) => {
 				color='dodgerblue'
 				textColor='black'
 			/>
-			<Button text={"Outlined with rounded borders"} onPress={() => {}} corners='rounded' size='large' color='purple' />
 			<Button text={"size xlarge & variant filled"} onPress={() => {}} variant='filled' size='xlarge' color='red' />
 			<Line
 				color='purple'
@@ -60,6 +65,22 @@ const ComponentsScreen = ({ navigation }: Props) => {
 					console.log("value: ", value);
 				}}
 				corner='circle'
+			/>
+			<Line color='black' type='thin' />
+			<Button
+				text={"Show Bottom Sheet"}
+				onPress={() => {
+					setShowBottomSheet({ ...showBottomSheet, show: true });
+					console.log("showBottomSheet: ", showBottomSheet);
+				}}
+				corners='rounded'
+				size='large'
+				color='purple'
+			/>
+			<BottomSheet
+				show={showBottomSheet.show}
+				sheetHeight={showBottomSheet.height}
+				onClose={(value: boolean) => setShowBottomSheet({ ...showBottomSheet, show: value })}
 			/>
 		</KeyboardAvoidingView>
 	);

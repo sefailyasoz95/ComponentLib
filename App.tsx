@@ -4,10 +4,10 @@ import React from "react";
 import MainStack from "./src/Stacks/MainStack";
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <MainStack />
-      <StatusBar style="auto" />
-    </NavigationContainer>
-  );
+	return (
+		<NavigationContainer>
+			<MainStack />
+			<StatusBar style='auto' />
+		</NavigationContainer>
+	);
 }
